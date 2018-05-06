@@ -53,10 +53,6 @@ public class AuthenticationBean implements Serializable {
         this.password = password;
     }
 
-    public User getLoginUser() {
-        return loginUser;
-    }
-
     public AuthenticationBean() {
     }
 

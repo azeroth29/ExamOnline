@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -74,6 +75,9 @@ public class Student implements Serializable {
         @JoinColumn(name = "_course_id", referencedColumnName = "_id")})
     @ManyToMany
     private List<Course> courseList;
+    @JoinColumn(name = "_class_id", referencedColumnName = "_id")
+    @ManyToOne(optional = false)
+    private Class classId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<ExamStudent> examStudentList;
 
@@ -148,6 +152,14 @@ public class Student implements Serializable {
 
     public void setCourseList(List<Course> courseList) {
         this.courseList = courseList;
+    }
+
+    public Class getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Class classId) {
+        this.classId = classId;
     }
 
     @XmlTransient
