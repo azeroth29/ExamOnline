@@ -15,8 +15,10 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import model.AuthenticationBean;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -32,6 +34,10 @@ public class UserBean implements Serializable{
     @EJB
     private RoleFacade roleFacade;
 
+    @Inject
+    private AuthenticationBean authenticationBean;
+    
+    
      private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UserBean.class);
      private static final Logger LOG = Logger.getLogger(UserBean.class.getName());
 
@@ -130,15 +136,13 @@ public class UserBean implements Serializable{
             user.setRoleId(getRoleFromId(roleId));
     }
     
-    public void prepareCreate(){
-        HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        session.setAttribute("createOrUpdate", "create");
-        }
     
     public String createUser(){
         try {
             prepUser();
+            
             user.setId(userFacade.generateUserId());
+            user.setStatus(true);
 
         userFacade.create(user);
 
@@ -163,6 +167,7 @@ public class UserBean implements Serializable{
         session.setAttribute("createOrUpdate", "update");
         return "user-details?faces-redirect=true";
     }
+    
     
     public String updateUser(){
         prepUser();
