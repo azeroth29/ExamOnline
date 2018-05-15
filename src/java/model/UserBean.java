@@ -17,11 +17,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-<<<<<<< HEAD:src/java/controller/UserBean.java
-import model.AuthenticationBean;
-=======
-import org.slf4j.Logger;
->>>>>>> 271883a84cadc7130fed2900a96e7000bd24e025:src/java/model/UserBean.java
 import org.slf4j.LoggerFactory;
 
 /**
@@ -38,16 +33,12 @@ public class UserBean implements Serializable {
     @EJB
     private RoleFacade roleFacade;
 
-<<<<<<< HEAD:src/java/controller/UserBean.java
     @Inject
     private AuthenticationBean authenticationBean;
     
     
      private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UserBean.class);
-     private static final Logger LOG = Logger.getLogger(UserBean.class.getName());
-=======
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserBean.class.getName());
->>>>>>> 271883a84cadc7130fed2900a96e7000bd24e025:src/java/model/UserBean.java
+     
 
     private User user;
     private String roleId;
@@ -130,7 +121,6 @@ public class UserBean implements Serializable {
     public Role getRoleFromId(String id) {
         return roleFacade.find(id);
     }
-<<<<<<< HEAD:src/java/controller/UserBean.java
     
     public void prepUser(){
             user = new User();
@@ -140,27 +130,9 @@ public class UserBean implements Serializable {
             user.setStatus(status);
             user.setRoleId(getRoleFromId(roleId));
     }
-    
-    
-    public String createUser(){
-=======
 
-    public void prepUser() {
-        user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setStatus(status);
-        user.setRoleId(getRoleFromId(roleId));
-    }
-
-    public void prepareCreate() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        session.setAttribute("createOrUpdate", "create");
-    }
 
     public String createUser() {
->>>>>>> 271883a84cadc7130fed2900a96e7000bd24e025:src/java/model/UserBean.java
         try {
             prepUser();
             
@@ -187,14 +159,9 @@ public class UserBean implements Serializable {
         session.setAttribute("createOrUpdate", "update");
         return "user-details?faces-redirect=true";
     }
-<<<<<<< HEAD:src/java/controller/UserBean.java
     
-    
-    public String updateUser(){
-=======
 
     public String updateUser() {
->>>>>>> 271883a84cadc7130fed2900a96e7000bd24e025:src/java/model/UserBean.java
         prepUser();
         user.setId(id);
         try {
